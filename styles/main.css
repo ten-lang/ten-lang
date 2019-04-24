@@ -1,0 +1,200 @@
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Exo', sans-serif;
+    color: rgb(108, 64, 19);
+}
+
+* {
+    font-family: 'Exo', sans-serif;
+}
+
+p {
+    font-size: 1.3em;
+}
+
+a {
+    text-decoration: none;
+}
+
+pre {
+    font-family: 'Source Code Pro', monospace;
+    background-color: rgb(222, 203, 186);
+    padding: 1em;
+    border-radius: 0.5em;
+}
+
+code {
+    font-family: 'Source Code Pro', monospace;
+    background-color: rgb(222, 203, 186);
+    border-radius: 0.2em;
+}
+
+body {
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(217, 179, 140);
+    padding: 0.5em;
+}
+
+body .pad {
+    -webkit-flex: 4 0;
+    flex: 4 0;
+}
+
+.content {
+    
+    -webkit-flex: 2 1 60em;
+    flex: 2 1 60em;
+    -webkit-align-items:    center;
+    -webkit-flex-direction: column;
+    align-items:            center;
+    flex-direction:         column;
+    margin-top:     1em;
+    margin-bottom:  3em;
+    padding:    0;
+}
+
+.l1 {
+    border-radius: 0.2em;
+    border-width:  0.1em;
+    box-shadow:    1px 1px 3px 0px rgb(108, 64, 19);
+}
+
+.l2 {
+    border-radius: 0.2em;
+    border-width:  0.1em;
+    box-shadow:    2px 2px 6px -1px rgb(108, 64, 19);
+}
+
+.l3 {
+    border-radius: 0.2em;
+    border-width:  0.1em;
+    box-shadow:    3px 3px 7px -2px rgb(108, 64, 19);
+}
+
+.s1 {
+    background-color: rgb(250, 243, 234);
+    padding: 1em;
+}
+
+.s2 {
+    background-color: rgb(236, 208, 172);
+    padding: 1em;
+}
+
+.s3 {
+    background-color: rgb(216, 161, 90)
+    padding: 1em;
+}
+
+header {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    
+    cursor:  default;
+    width:   inherit;
+}
+
+main {
+    width: inherit;
+    margin: 0;
+}
+
+header h1 {
+    font-size:   2em;
+    margin:      0;
+    margin-left: 1em;
+    
+    color: rgb(108, 64, 19);
+}
+
+.social {
+    display:    block;
+    width:      2em;
+    height:     2em;
+    margin:     0.25em;
+    
+    -webkit-flex: 0 0 auto;
+    flex:         0 0 auto;
+    
+    background-position: center;
+    background-repeat:   no-repeat;
+    background-size:     contain;
+}
+
+.ghm {
+    background-image: url("../images/ghm.svg");
+}
+
+.ldm {
+    background-image: url("../images/ldm.svg");
+}
+
+.qrm {
+    background-image: url("../images/qrm.svg");
+}
+
+.hg {
+    -webkit-transition: width .25s, height .25s, -webkit-transform .25s ease-in-out;
+    transition:  width .25s, height .25s, transform .25s  ease-in-out;
+}
+
+.hg:hover {
+    transform: scale( 1.1, 1.1 );
+}
+
+header .pad {
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+
+.main-nav {
+    display: -webkit-flex;
+    display: flex;
+    margin:  .5em;
+}
+
+.main-nav a {
+    display:         block;
+    font-size:       1.4em;
+    padding:         0.2em;
+    margin:          0.4em;
+    
+    font-family: 'Exo', sans-serif;
+    color:        rgb(108, 64, 19);
+}
+
+.card-grid {
+    display: flex;
+    margin:  0;
+    padding: 0;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    width:    15em;
+    cursor:   default;
+    margin:   0.5em;
+}
+
+.card-content {
+    height: 20em;
+    padding-bottom: 0.5em;
+    font-size: 0.8em;
+    overflow: hidden;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+
+.main-nav li {
+    list-style: none;
+}

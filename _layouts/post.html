@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-138964313-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-138964313-1');
+    </script>
+        
+    <meta charset="utf-8">
+    <meta name="description" content="My personal site">
+    <title>ten - {{ page.title }}</title>
+    
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <script src="../../../scripts/main.js" type="javascript"></script>
+    <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+  </head>
+  <body>
+    <div class="pad"></div>
+    <div class="content">
+        <header class="l1 s1">
+          <h1>{{ page.title }}</h1>
+          <div class="pad"></div>
+        </header>
+        <nav class="main-nav">
+            <li><a id="posts-nav" href="../../../posts.html" class="hg s2 l2">Posts</a></li>
+        </nav>
+        <main class="s1 l1">
+            {{ content }}
+        </main>
+    </div>
+    <div class="pad"></div>
+    <footer>
+    
+    </footer>
+  </body>
+</html>

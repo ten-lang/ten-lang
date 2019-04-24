@@ -1,0 +1,287 @@
+---
+layout: page
+title: Hash Atlas
+---
+<p>
+HashAtlas is a project that attempts to provide comprehensive performance
+and memory benchmarks for various hash map designs.  The following table
+lists the current set of benchmark cases; for each map design we run
+several different benchmarks with different parameters to give an idea
+of how the performance varies and for which use cases a particular design
+might be suitable.
+</p>
+<p>
+Benchmark cases which are selected from the table will be graphed for
+better visual comparison in the following bar charts.  The raw benchmark
+data is also available as <a href="../files/hash_atlas.csv">CSV</a> and
+<a href="../files/hash_atlas.json">JSON</a>.
+</p>
+<table id="atlas-table" width="100%">
+    <tr>
+        <th align="center">Chart</th>
+        <th align="center">Design</th>
+        <th align="center">Size</th>
+        <th align="center">Growth</th>
+        <th align="center">Density</th>
+        <th align="center">Hash</th>
+        <th align="center">Memory Usage (Kb)</th>
+        <th align="center">Lookup Delay (μs)</th>
+        <th align="center">Insert Delay (μs)</th>
+    </tr>
+    <tr id="filters">
+      <td align="center"><input id="select-all" type="checkbox" onchange="selectAll()"></td>
+      <td align="center">
+        <select size="1" id="design-filter" onchange="filter()">
+            <option value="Any">Any</option>
+            <option value="OA0">OA0</option>
+            <option value="OA1">OA1</option>
+            <option value="SC0">SC0</option>
+            <option value="SC1">SC1</option>
+        </select>
+      </td>
+      <td align="center">
+        <select id="size-filter" onchange="filter()">
+            <option value="Any">Any</option>
+            <option value="Large">Large</option>
+            <option value="Medium">Medium</option>
+            <option value="Small">Small</option>
+        </select>
+      </td>
+      <td align="center">
+        <select id="growth-filter" onchange="filter()">
+            <option value="Any">Any</option>
+            <option value="Fast">Fast</option>
+            <option value="Slow">Slow</option>
+            <option value="Double">Double</option>
+        </select>
+      </td>
+      <td align="center">
+        <select id="density-filter" onchange="filter()">
+            <option value="Any">Any</option>
+            <option value="1/3">1/3</option>
+            <option value="2/3">2/3</option>
+        </select>
+      </td>
+      <td align="center">
+        <select id="hash-filter" onchange="filter()">
+            <option value="Any">Any</option>
+            <option value="Easy">Easy</option>
+        </select>
+      </td>
+    </tr>
+    {% for entry in site.data.hash_atlas %}
+        <tr
+            class="benchmark-row"
+            data-case="{{ entry.case }}"
+            data-design="{{ entry.design.value }}"
+            data-size="{{ entry.size.value }}"
+            data-growth="{{ entry.growth.value }}"
+            data-density="{{ entry.density.value }}"
+            data-hash="{{ entry.hash.value }}"
+            data-memory="{{ entry.memory }}"
+            data-lookup="{{ entry.lookup }}"
+            data-insert="{{ entry.insert }}"
+         >
+            <td align="center"><input onchange="update()" class="should-chart" type="checkbox"></td>
+            <td align="center"><a href="{{ entry.design.url }}">{{ entry.design.value }}</a></td>
+            <td align="center"><a href="{{ entry.size.url }}">{{ entry.size.value }}</a></td>
+            <td align="center"><a href="{{ entry.growth.url }}">{{ entry.growth.value }}</a></td>
+            <td align="center"><a href="{{ entry.density.url }}">{{ entry.density.value }}</a></td>
+            <td align="center"><a href="{{ entry.hash.url }}">{{ entry.hash.value  }}</a></td>
+            <td align="right">{{ entry.memory }}</td>
+            <td align="right">{{ entry.lookup }}</td>
+            <td align="right">{{ entry.insert }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<script type="application/javascript">
+    function filter() {
+        var design   = document.getElementById( 'design-filter' ).value
+        var size     = document.getElementById( 'size-filter' ).value
+        var growth   = document.getElementById( 'growth-filter' ).value
+        var density  = document.getElementById( 'density-filter' ).value
+        var hash     = document.getElementById( 'hash-filter' ).value
+        var entries = document.getElementsByClassName( 'benchmark-row' )
+        for( var i = 0 ; i < entries.length ; i++ ) {
+          var entry   = entries.item( i )
+          var visible =
+            ( design == 'Any' || design == entry.getAttribute( 'data-design' ) ) &&
+            ( size == 'Any' || size == entry.getAttribute( 'data-size' ) ) &&
+            ( growth == 'Any' || growth == entry.getAttribute( 'data-growth' ) ) &&
+            ( density == 'Any' || density == entry.getAttribute( 'data-density' ) ) &&
+            ( hash == 'Any' || hash == entry.getAttribute( 'data-hash' ) )
+            
+          if( visible ) {
+            entry.style.display = "table-row"
+          }
+          else {
+            entry.style.display = "none"
+            entry.getElementsByClassName( 'should-chart' ).item( 0 ).checked = false
+          }
+        }
+        update()
+    }
+    
+    function selectAll() {
+        var select  = document.getElementById( 'select-all' ).checked
+        var entries = document.getElementsByClassName( 'benchmark-row' )
+        for( var i = 0 ; i < entries.length ; i++ ) {
+            var entry = entries.item( i )
+            if( entry.style.display == "none" )
+                continue
+           entry.getElementsByClassName( 'should-chart' ).item( 0 ).checked = select
+        }
+        update()
+    }
+</script>
+<h2>Design</h2>
+<p>
+The design used in a benchmark is the name assigned to a particular
+hash map implementation.  These begin with either 'OA' for open
+addressing hash maps or 'SC' for separate chaining designs.  The
+following number is just used as a form of ID to allow the different
+designs to be distinguished from each other.
+</p>
+<h2>Size</h2>
+<p>
+The size of the benchmark tells us how large the map was made (i.e
+how many items were added to it).  This will be one of 'Small' (20 items),
+'Medium' (500 items), and 'Large' (10000 items).
+</p>
+
+<h2>Growth</h2>
+<p>
+The growth indicates the strategy used for choosing the next size of
+the map's bucket array.  The 'Fast' cases choose the next size from
+an array of prime numbers, with each subsequent size being roughly
+double the previous size.  The 'Slow' cases also choose from an array
+of primes, only these grow a bit slower, wich the each subsequent size
+about 1.5 times the previous one.  The 'Double' cases don't use prime
+numbers at all, instead the size of the array just doubles when the
+map needs more room.
+</p>
+
+<h2>Density</h2>
+<p>
+The density gives the maximum ratio of items to bucket slots allowed
+in the map before it has to grow.
+</p>
+
+<h2>Hash</h2>
+<p>
+The hash column shows which hash function was used in the benchmark,
+for now only one 'Easy' hash function is implemented; which is a
+simple and naive hash algorithm.
+</p>
+
+<h2>Memory Usage</h2>
+<p>
+This tells us how much total memory (in bytes) the map used in each
+benchmark.
+</p>
+<div class="ct-chat ct-major-tenth" id="memory-chart"></div>
+
+
+<h2>Lookup Time</h2>
+<p>
+The lookup time is the average delay incurred every time an item is
+retrieved from the map by its key.  For each benchmark the lookup
+time is recorded after all items have already been added to the
+map.
+</p>
+<div class="ct-chat ct-major-tenth" id="lookup-chart"></div>
+
+<h2>Insert Time</h2>
+<p>
+The insert time is the average delay incurred every time an item is
+added to the map by its key.  For each benchmark the insert time
+is measured as the map is being populated; this is important to note
+because for many (most?) map designs insertion becomes more expensive
+as the map grows, so the value reported here is actually the average
+delay for insertions between a map size of 0 and the benchmark size.
+</p>
+<div class="ct-chat ct-major-tenth" id="insert-chart"></div>
+
+<style>
+    .ct-series-a .ct-bar {
+        stroke: #3366cc;
+    }
+    .ct-series-b .ct-bar {
+        stroke: #dc3912;
+    }
+    .ct-series-c .ct-bar {
+        stroke: #ff9900;
+    }
+    .ct-series-d .ct-bar {
+        stroke: #109618;
+    }
+    .ct-series-e .ct-bar {
+        stroke: #990099;
+    }
+    .ct-series-f .ct-bar {
+        stroke: #0099c6;
+    }
+    .ct-series-g .ct-bar {
+        stroke: #dd4477;
+    }
+    .ct-series-h .ct-bar {
+        stroke: #66aa00;
+    }
+    .ct-series-i .ct-bar {
+        stroke: #b82e2e;
+    }
+    .ct-series-j .ct-bar {
+        stroke: #3366cc;
+    }
+    .ct-bar {
+        stroke-width: 3em;
+    }
+</style>
+<script type="application/javascript">
+    var mchart = new Chartist.Bar( '#memory-chart', {
+        labels: [],
+        series: []
+    },
+    {
+        distributeSeries: true,
+        onlyInteger: true
+    })
+    var lchart = new Chartist.Bar( '#lookup-chart',{
+        labels: [],
+        series: []
+    },
+    {
+        distributeSeries: true
+    })
+    var ichart = new Chartist.Bar( '#insert-chart', {
+        labels: [],
+        series: []
+    },
+    {
+        distributeSeries: true
+    })
+    
+    function update() {
+        console.log( "Updated Chart" )
+        var labels = []
+        var memory = []
+        var lookup = []
+        var insert = []
+        
+        var entries = document.getElementsByClassName( 'benchmark-row' )
+        for( var i = 0 ; i < entries.length ; i++ ) {
+            var entry = entries.item( i )
+            if( !entry.getElementsByClassName( 'should-chart' ).item( 0 ).checked )
+                continue
+            
+            labels.push( entry.getAttribute( 'data-case' ) )
+            memory.push( Number( entry.getAttribute( 'data-memory' ) ) )
+            lookup.push( Number( entry.getAttribute( 'data-lookup' ) ) )
+            insert.push( Number( entry.getAttribute( 'data-insert' ) ) )
+        }
+        
+        mchart.update({ labels: labels, series: memory })
+        lchart.update({ labels: labels, series: lookup })
+        ichart.update({ labels: labels, series: insert })
+    }
+</script>
