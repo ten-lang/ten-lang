@@ -1,0 +1,3 @@
+[submodule "ten-manual"]
+	path = ten-manual
+	url = ./ten-manual
