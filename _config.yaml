@@ -4,4 +4,8 @@ author: Ray Stubbs
 collections:
     - projects
     - pages
-
+plugins:
+    - jekyll-optional-front-matter
+    - jekyll-titles-from-headings
+    - jekyll-default-layout
+    - jekyll-relative-links
