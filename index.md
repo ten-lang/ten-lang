@@ -8,8 +8,10 @@ now it's just me working on the language and it isn't ready for public use,
 but if you'd like to get involved then feel free to contact me
 [on reddit](https://www.reddit.com/user/raystubbs).
 
-For installation instructions and a quick intro to the language you
-can check out [this page](https://github.com/ten-lang/docs/blob/master/LanguageGuide.md).
+For installation instructions you can check out the [Getting Started](getting-started) page.
+Unfortunately there isn't much auxiliary material on the language itself
+for now, but the [Ten Reference Manual](https://github.com/ten-lang/ten-manual)
+gives full coverage of the language, its prelude, and embedding API.
 
 ## About Ten
 Ten is a general purpose scripting language inspired by Lua. It's
@@ -33,14 +35,14 @@ it apart from other languages of the same class.
   tables; they're designed such that groups of records that maintain
   a similar set of keys can share a common lookup table, allowing
   for huge memory savings.  Check
-  [here](https://github.com/ten-lang/docs/blob/master/LanguageGuide.md#record)
+  [here](https://github.com/ten-lang/ten-manual/blob/master/basic-concepts.md#2.2)
   for a bit more on how these work.
 
 - **Re-Entrant Native Functions:** Ten sports a pretty nice API for
   host applications interacting with the language runtime, but its
   support for implementing re-entrant native functions is particularly
   neat.  Check out
-  [this post](http://www.raystubbs.me/2019/04/20/HandlingYieldsInTen.html)
+  [this post](https://github.com/ten-lang/ten-manual/blob/master/the-api.md#5.9.1)
   for more on how that works.
 
 ## Samples
