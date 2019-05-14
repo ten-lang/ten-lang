@@ -151,7 +151,7 @@ To the start of the script, make it executable, then just do:
 Ten is a pretty immature language, so at this point there aren't many
 learning resources available.  But if you have experience with other
 languages then it shouldn't be too difficult to dive right in to the
-[Ten Manual](https://github.com/ten-lang/ten-manual).
+[Ten Manual](https://github.com/ten-lang/libten/tree/master/docs/manual).
 
 Also if you have any questions, suggestions, bug reports, etc. then
 feel free to contact me or submit an issue on Github.  I can be

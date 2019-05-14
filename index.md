@@ -10,7 +10,7 @@ but if you'd like to get involved then feel free to contact me
 
 For installation instructions you can check out the [Getting Started](getting-started) page.
 Unfortunately there isn't much auxiliary material on the language itself
-for now, but the [Ten Reference Manual](https://github.com/ten-lang/ten-manual)
+for now, but the [Ten Reference Manual](https://github.com/ten-lang/libten/tree/master/docs/manual)
 gives full coverage of the language, its prelude, and embedding API.
 
 ## About Ten
