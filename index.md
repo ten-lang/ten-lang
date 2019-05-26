@@ -50,7 +50,7 @@ Here are a few code samples to give an idea of what the language
 looks like:
 
 ### Hello Person
-    def name: do show"What's you're name? " for input()
+    def name: do show"What's your name? " for input()
     show( "Hello, ", name, "!", N )
 
 ### Fizz Buzz
