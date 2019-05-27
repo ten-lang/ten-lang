@@ -35,7 +35,7 @@ At the time of this writing the core Ten implementation compiles to
 the following sizes for the indicated platforms via GCC.
 
 |    Platforms    |            Size         |
-|:---------------:|------------------------:|
+|:---------------:|:-----------------------:|
 |   amd64-linux   |                   200Kb |
 |   arm-none      |                   171Kb |
 |   wasm          |                    27Kb |
