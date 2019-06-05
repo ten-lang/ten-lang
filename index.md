@@ -35,14 +35,14 @@ it apart from other languages of the same class.
   tables; they're designed such that groups of records that maintain
   a similar set of keys can share a common lookup table, allowing
   for huge memory savings.  Check
-  [here](2019/05/17/Records.html)
+  [here](2019/05/26/Records.html)
   for a bit more on how these work.
 
 - **Re-Entrant Native Functions:** Ten sports a pretty nice API for
   host applications interacting with the language runtime, but its
   support for implementing re-entrant native functions is particularly
   neat.  Check out
-  [this post](2019/05/17/Re-Entry.html)
+  [this post](2019/05/26/Re-Entry.html)
   for more on how that works.
 
 ## Samples
