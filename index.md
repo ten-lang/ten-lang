@@ -71,3 +71,12 @@ looks like:
         n
       else
         this( n - 1 ) + this( n - 2 )
+
+### Linked List
+    def cons: [ car, cdr ] { .car: car, .cdr: cdr }
+    def list: [ vals... ] do
+        def iter: rseq( vals )
+        def recr: [] do
+            def next: iter()
+        for next &? cons( next, this() )
+    for recr()
