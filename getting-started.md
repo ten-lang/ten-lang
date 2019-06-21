@@ -38,7 +38,7 @@ package repository for distributing pre-built binary packages.
 ### RPM
 On `yum` based systems just add the repo to your package manager with:
 
-    sudo sh  "$(wget -O - https://git.io/fjOZI)"
+    wget -O - https://git.io/fjOZI | sudo sh
 
 Then install the CLI with:
 
@@ -49,7 +49,7 @@ This will automatically install the other two units as well.
 ### DEB
 Similarly for `apt` based systems add Ten's package repo with:
 
-    sudo sh "$(wget https://git.io/fjOZn)"
+    wget -O - https://git.io/fj25i | sudo sh
 
 And install the CLI with:
 
